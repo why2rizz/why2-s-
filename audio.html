@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>why2gen</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        .gif-container {
+            max-width: 80%;
+            max-height: 70vh;
+            margin-bottom: 30px;
+        }
+        
+        .gif-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .continue-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 40px;
+            font-size: 18px;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            outline: none;
+        }
+        
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        .continue-btn:active {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="gif-container">
+        <img src="" alt="Анимированная гифка" id="backgroundGif">
+    </div>
+    
+    <button class="continue-btn" onclick="redirectToSite()">тг чэнэл</button>
+
+    <audio id="backgroundMusic" loop autoplay>
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        // Массив с 10 гифками (замените на свои URL)
+        const gifs = [
+            'https://media.tenor.com/_T33Lq1ARb8AAAAi/komaru.gif',
+            'https://media.tenor.com/T6-5hBkirjkAAAAM/troll-face-gif',
+            'https://media.tenor.com/9Cd1h4LmnasAAAAC/minion-stare.gif'
+        ];
+
+        const musicFiles = [
+            'detskiy-smeh-z_uki.mp3',
+            'ssstik.io_1742158932088.mp3'
+            'alfa-boegolovka.mp3'
+            ];
+
+        // Функция для получения случайного элемента из массива
+        function getRandomItem(array) {
+            const randomIndex = Math.floor(Math.random() * array.length);
+            return array[randomIndex];
+        }
+
+        // Функция для настройки случайных медиа
+        function setupRandomMedia() {
+            const randomGif = getRandomItem(gifs);
+            const randomMusic = getRandomItem(musicFiles);
+            
+            // Устанавливаем случайную гифку
+            const gifElement = document.getElementById('backgroundGif');
+            gifElement.src = randomGif;
+            
+            // Устанавливаем случайную музыку
+            const musicElement = document.getElementById('backgroundMusic');
+            musicElement.innerHTML = `<source src="${randomMusic}" type="audio/mpeg">`;
+            
+            console.log('Выбрана гифка:', randomGif);
+            console.log('Выбрана музыка:', randomMusic);
+            
+            return musicElement;
+        }
+
+        // Функция для перенаправления на другой сайт
+        function redirectToSite() {
+            window.location.href = 'https://t.me/why2studios'; // Замените на ваш URL
+        }
+
+        // Автоматическое воспроизведение музыки при загрузке
+        window.addEventListener('load', function() {
+            const musicElement = setupRandomMedia();
+            musicElement.volume = 0.5; // Устанавливаем громкость на 50%
+            
+            // Пытаемся воспроизвести музыку автоматически
+            musicElement.play().catch(error => {
+                console.log('Автовоспроизведение заблокировано, требуется взаимодействие:', error);
+                
+                // Показываем сообщение о необходимости клика
+                const message = document.createElement('div');
+                message.style.position = 'fixed';
+                message.style.top = '20px';
+                message.style.left = '50%';
+                message.style.transform = 'translateX(-50%)';
+                message.style.color = 'white';
+                message.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                message.style.padding = '10px 20px';
+                message.style.borderRadius = '5px';
+                message.style.zIndex = '1000';
+                message.textContent = 'кликни пж';
+                document.body.appendChild(message);
+                
+                // Удаляем сообщение через 5 секунд
+                setTimeout(() => {
+                    if (message.parentNode) {
+                        message.parentNode.removeChild(message);
+                    }
+                }, 2000);
+            });
+        });
+
+        // Обработчик для клика по странице (если автовоспроизведение заблокировано)
+        document.addEventListener('click', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.paused) {
+                music.play().catch(console.error);
+            }
+        }, { once: true });
+
+        // Обработчик для touch событий (мобильные устройства)
+        document.addEventListener('touchstart', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.paused) {
+                music.play().catch(console.error);
+            }
+        }, { once: true });
+
+        // Обработчик для клавиатуры
+        document.addEventListener('keydown', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.paused) {
+                music.play().catch(console.error);
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
