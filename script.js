@@ -1,29 +1,17 @@
-// Массив с 10 гифками (замените на свои URL)
+// gifs
 const gifs = [
-    'https://media.giphy.com/media/3o7aTskHEUdgCQAXde/giphy.gif',
-    'https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif',
-    'https://media.giphy.com/media/3o7abGQa0aRsohveX6/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsQ7U1hmgZXnBC/giphy.gif',
-    'https://media.giphy.com/media/3o7TKz2eMX36bnyqSY/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsQ8U1hmgZXnBC/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsR8U1hmgZXnBC/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsT8U1hmgZXnBC/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsU8U1hmgZXnBC/giphy.gif',
-    'https://media.giphy.com/media/3o7TKsV8U1hmgZXnBC/giphy.gif'
+    'https://media.tenor.com/9Cd1h4LmnasAAAAC/minion-stare.gif',
+    'https://media.tenor.com/KDrTiqytu4EAAAAC/sponsor-roblox.gif',
+    'https://media.tenor.com/_T33Lq1ARb8AAAAi/komaru.gif',
 ];
 
-// Массив с 10 музыкальными файлами (замените на свои URL)
+// music
 const musicFiles = [
     'music/song1.mp3',
     'music/song2.mp3',
     'music/song3.mp3',
     'music/song4.mp3',
     'music/song5.mp3',
-    'music/song6.mp3',
-    'music/song7.mp3',
-    'music/song8.mp3',
-    'music/song9.mp3',
-    'music/song10.mp3'
 ];
 
 // Функция для получения случайного элемента из массива
@@ -33,7 +21,7 @@ function getRandomItem(array) {
 }
 
 // Функция для показа сообщения
-function showMessage(text, duration = 3000) {
+function showMessage(text, duration = 500) {
     const message = document.createElement('div');
     message.className = 'loading-message';
     message.textContent = text;
@@ -71,7 +59,7 @@ function setupRandomMedia() {
 
 // Функция для запуска воспроизведения
 function startPlayback(musicElement, gifElement) {
-    musicElement.volume = 0.5;
+    musicElement.volume = 1;
     
     // Показываем гифку когда она загрузится
     gifElement.onload = function() {
@@ -84,13 +72,13 @@ function startPlayback(musicElement, gifElement) {
         console.log('Музыка успешно запущена');
     }).catch(error => {
         console.log('Автовоспроизведение заблокировано:', error);
-        showMessage('Кликните anywhere для воспроизведения музыки', 5000);
+        showMessage('кликай', 2000);
     });
 }
 
 // Функция для перенаправления на другой сайт
 function redirectToSite() {
-    window.location.href = 'https://example.com';
+    window.location.href = 'https://t.me/why2studios';
 }
 
 // Основная функция инициализации
@@ -110,7 +98,7 @@ function init() {
     // Таймаут на случай проблем с загрузкой
     setTimeout(() => {
         startPlayback(musicElement, gifElement);
-    }, 2000);
+    }, 1);
 }
 
 // Обработчики для ручного запуска музыки
